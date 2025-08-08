@@ -23,7 +23,7 @@
         <div class="sidebar-header">
             <div class="profile-section">
                 <div class="profile-image-container">
-                    <img src="/Best.jpeg" alt="Osama M. Naguib" class="profile-image">
+                    <img src="Best.jpeg" alt="Osama M. Naguib" class="profile-image">
                     <div class="profile-status"></div>
                 </div>
                 <h1 class="profile-name">Osama M. Naguib</h1>
@@ -72,19 +72,6 @@
         </div>
     </nav>
     
-    <!-- React App Root -->
-    <div id="root"></div>
-    
-    <!-- Fallback content for non-JS users -->
-    <noscript>
-        <div style="text-align: center; padding: 50px;">
-            <h1>JavaScript Required</h1>
-            <p>This website requires JavaScript to function properly.</p>
-        </div>
-    </noscript>
-    
-    <!-- Static fallback content (hidden by default, shown if React fails) -->
-    <div id="static-fallback" style="display: none;">
     <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
         <i class="fas fa-bars"></i>
@@ -367,73 +354,8 @@
             </div>
         </section>
     </main>
-    </div>
     
-    <!-- Vite React App Entry Point -->
-    <script type="module" src="/src/main.tsx"></script>
-    
-    <!-- Error handling script -->
-    <script>
-        // Show static fallback if React fails to load
-        setTimeout(() => {
-            if (!document.querySelector('#root').hasChildNodes()) {
-                document.getElementById('static-fallback').style.display = 'block';
-                console.log('React failed to load, showing static fallback');
-                
-                // Add static functionality
-                // Mobile menu toggle
-                const mobileToggle = document.getElementById('mobile-menu-toggle');
-                const sidebar = document.getElementById('sidebar');
-                if (mobileToggle && sidebar) {
-                    mobileToggle.addEventListener('click', () => {
-                        sidebar.classList.toggle('active');
-                    });
-                }
-                
-                // Theme toggle
-                const themeToggle = document.getElementById('theme-toggle');
-                if (themeToggle) {
-                    themeToggle.addEventListener('click', () => {
-                        document.body.classList.toggle('dark-theme');
-                        localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
-                    });
-                }
-                
-                // Load saved theme
-                if (localStorage.getItem('theme') === 'dark') {
-                    document.body.classList.add('dark-theme');
-                }
-                
-                // Smooth scrolling for navigation
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const target = document.querySelector(link.getAttribute('href'));
-                        if (target) {
-                            target.scrollIntoView({ behavior: 'smooth' });
-                        }
-                    });
-                });
-                
-                // Accordion functionality
-                document.querySelectorAll('.accordion-header').forEach(header => {
-                    header.addEventListener('click', () => {
-                        const target = document.getElementById(header.dataset.target);
-                        const isActive = header.parentElement.classList.contains('active');
-                        
-                        // Close all accordions
-                        document.querySelectorAll('.accordion-item').forEach(item => {
-                            item.classList.remove('active');
-                        });
-                        
-                        // Open clicked accordion if it wasn't active
-                        if (!isActive) {
-                            header.parentElement.classList.add('active');
-                        }
-                    });
-                });
-            }
-        }, 3000);
-    </script>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
