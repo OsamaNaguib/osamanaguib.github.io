@@ -72,6 +72,19 @@
         </div>
     </nav>
     
+    <!-- React App Root -->
+    <div id="root"></div>
+    
+    <!-- Fallback content for non-JS users -->
+    <noscript>
+        <div style="text-align: center; padding: 50px;">
+            <h1>JavaScript Required</h1>
+            <p>This website requires JavaScript to function properly.</p>
+        </div>
+    </noscript>
+    
+    <!-- Static fallback content (hidden by default, shown if React fails) -->
+    <div id="static-fallback" style="display: none;">
     <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
         <i class="fas fa-bars"></i>
@@ -354,8 +367,23 @@
             </div>
         </section>
     </main>
+    </div>
     
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+    <!-- Vite React App Entry Point -->
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Error handling script -->
+    <script>
+        // Show static fallback if React fails to load
+        setTimeout(() => {
+            if (!document.querySelector('#root').hasChildNodes()) {
+                document.getElementById('static-fallback').style.display = 'block';
+                // Load the static JavaScript
+                const script = document.createElement('script');
+                script.src = './script.js';
+                document.head.appendChild(script);
+            }
+        }, 3000);
+    </script>
 </body>
 </html>

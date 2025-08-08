@@ -344,23 +344,217 @@ class ContactManager {
     }
 }
 
-// Error Handling
+// Enhanced Error Handling
 class ErrorHandler {
     constructor() {
+        this.errors = [];
         this.init();
     }
 
     init() {
+        // JavaScript runtime errors
         window.addEventListener('error', (e) => {
-            console.error('JavaScript error:', e.error);
-            // Optionally send error reports to a service
+            const error = {
+                type: 'JavaScript Error',
+                message: e.message,
+                filename: e.filename,
+                line: e.lineno,
+                column: e.colno,
+                stack: e.error?.stack,
+                timestamp: new Date().toISOString()
+            };
+            this.logError(error);
         });
 
+        // Promise rejection errors
         window.addEventListener('unhandledrejection', (e) => {
-            console.error('Unhandled promise rejection:', e.reason);
+            const error = {
+                type: 'Unhandled Promise Rejection',
+                message: e.reason?.message || e.reason,
+                stack: e.reason?.stack,
+                timestamp: new Date().toISOString()
+            };
+            this.logError(error);
         });
+
+        // Resource loading errors
+        window.addEventListener('error', (e) => {
+            if (e.target !== window) {
+                const error = {
+                    type: 'Resource Loading Error',
+                    element: e.target.tagName,
+                    source: e.target.src || e.target.href,
+                    message: `Failed to load ${e.target.tagName}: ${e.target.src || e.target.href}`,
+                    timestamp: new Date().toISOString()
+                };
+                this.logError(error);
+                this.handleResourceError(e.target);
+            }
+        }, true);
+
+        // Network errors for fetch requests
+        this.interceptFetch();
+    }
+
+    logError(error) {
+        this.errors.push(error);
+        console.error('🚨 Error Detected:', error);
+        
+        // Show user-friendly error notification
+        this.showErrorNotification(error);
+        
+        // Store in localStorage for debugging
+        try {
+            const storedErrors = JSON.parse(localStorage.getItem('portfolio-errors') || '[]');
+            storedErrors.push(error);
+            // Keep only last 10 errors
+            if (storedErrors.length > 10) storedErrors.shift();
+            localStorage.setItem('portfolio-errors', JSON.stringify(storedErrors));
+        } catch (e) {
+            console.warn('Could not store error in localStorage:', e);
+        }
+    }
+
+    handleResourceError(element) {
+        if (element.tagName === 'IMG') {
+            // Fallback for broken images
+            element.style.display = 'none';
+            const fallback = document.createElement('div');
+            fallback.className = 'image-fallback';
+            fallback.innerHTML = '<i class="fas fa-image"></i><p>Image not available</p>';
+            element.parentNode?.insertBefore(fallback, element);
+        } else if (element.tagName === 'SCRIPT') {
+            // Handle missing JavaScript files
+            console.warn('Script failed to load, some features may not work:', element.src);
+        } else if (element.tagName === 'LINK') {
+            // Handle missing CSS files
+            console.warn('Stylesheet failed to load, styling may be affected:', element.href);
+        }
+    }
+
+    interceptFetch() {
+        const originalFetch = window.fetch;
+        window.fetch = async (...args) => {
+            try {
+                const response = await originalFetch(...args);
+                if (!response.ok) {
+                    const error = {
+                        type: 'Network Error',
+                        message: `HTTP ${response.status}: ${response.statusText}`,
+                        url: args[0],
+                        status: response.status,
+                        timestamp: new Date().toISOString()
+                    };
+                    this.logError(error);
+                }
+                return response;
+            } catch (error) {
+                const networkError = {
+                    type: 'Network Error',
+                    message: error.message,
+                    url: args[0],
+                    timestamp: new Date().toISOString()
+                };
+                this.logError(networkError);
+                throw error;
+            }
+        };
+    }
+
+    showErrorNotification(error) {
+        // Create error notification element
+        const notification = document.createElement('div');
+        notification.className = 'error-notification';
+        notification.innerHTML = `
+            <div class="error-content">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <strong>${error.type}</strong>
+                    <p>${error.message}</p>
+                </div>
+                <button class="error-close" onclick="this.parentElement.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `;
+        
+        // Add styles if not already added
+        if (!document.querySelector('#error-notification-styles')) {
+            const styles = document.createElement('style');
+            styles.id = 'error-notification-styles';
+            styles.textContent = `
+                .error-notification {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #fee;
+                    border: 1px solid #fcc;
+                    border-radius: 8px;
+                    padding: 15px;
+                    max-width: 400px;
+                    z-index: 10000;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    animation: slideIn 0.3s ease;
+                }
+                .error-content {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 10px;
+                }
+                .error-notification i.fa-exclamation-triangle {
+                    color: #d32f2f;
+                    font-size: 20px;
+                    margin-top: 2px;
+                }
+                .error-notification strong {
+                    color: #d32f2f;
+                    font-size: 14px;
+                }
+                .error-notification p {
+                    margin: 5px 0 0 0;
+                    font-size: 13px;
+                    color: #666;
+                }
+                .error-close {
+                    background: none;
+                    border: none;
+                    color: #999;
+                    cursor: pointer;
+                    padding: 0;
+                    margin-left: auto;
+                }
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(styles);
+        }
+        
+        document.body.appendChild(notification);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.remove();
+            }
+        }, 5000);
+    }
+
+    // Method to get all errors for debugging
+    getErrors() {
+        return this.errors;
+    }
+
+    // Method to clear errors
+    clearErrors() {
+        this.errors = [];
+        localStorage.removeItem('portfolio-errors');
     }
 }
+
+// Global error handler instance for debugging
+let globalErrorHandler;
 
 // Initialize all managers when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -374,10 +568,22 @@ document.addEventListener('DOMContentLoaded', () => {
     new PerformanceManager();
     new AnalyticsManager();
     new ContactManager();
-    new ErrorHandler();
+    globalErrorHandler = new ErrorHandler();
     
     // Custom animations for specific elements
     initCustomAnimations();
+    
+    // Make error debugging available globally
+    window.getErrors = () => globalErrorHandler.getErrors();
+    window.clearErrors = () => globalErrorHandler.clearErrors();
+    window.showStoredErrors = () => {
+        const stored = localStorage.getItem('portfolio-errors');
+        if (stored) {
+            console.table(JSON.parse(stored));
+        } else {
+            console.log('No stored errors found');
+        }
+    };
 });
 
 // Custom animations and interactions
