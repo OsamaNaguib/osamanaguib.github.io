@@ -49,7 +49,7 @@ function App() {
         <div className="sidebar-header">
           <div className="profile-section">
             <div className="profile-image-container">
-              <img src="public/Best.jpeg" alt="Osama M. Naguib" className="profile-image" />
+              <img src="/Best.jpeg" alt="Osama M. Naguib" className="profile-image" />
               <div className="profile-status"></div>
             </div>
             <h1 className="profile-name">Osama M. Naguib</h1>

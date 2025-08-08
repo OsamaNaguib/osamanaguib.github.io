@@ -23,7 +23,7 @@
         <div class="sidebar-header">
             <div class="profile-section">
                 <div class="profile-image-container">
-                    <img src="public/Best.jpeg" alt="Osama M. Naguib" class="profile-image">
+                    <img src="/Best.jpeg" alt="Osama M. Naguib" class="profile-image">
                     <div class="profile-status"></div>
                 </div>
                 <h1 class="profile-name">Osama M. Naguib</h1>
@@ -59,10 +59,10 @@
         
         <div class="sidebar-footer">
             <div class="social-links">
-                <a href="https://www.linkedin.com/in/osama-naguib/" target="_blank" aria-label="LinkedIn Profile">
+                <a href="https://www.linkedin.com/in/osama-naguib/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="https://github.com/OsamaNaguib" target="_blank" aria-label="GitHub Profile">
+                <a href="https://github.com/OsamaNaguib" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
                     <i class="fab fa-github"></i>
                 </a>
                 <a href="mailto:osama_naguib@hotmail.com" aria-label="Send Email">
@@ -353,7 +353,7 @@
                             </div>
                         </a>
                         
-                        <a href="https://www.linkedin.com/in/osama-naguib/" target="_blank" class="contact-method fade-in">
+                        <a href="https://www.linkedin.com/in/osama-naguib/" target="_blank" rel="noopener noreferrer" class="contact-method fade-in">
                             <div class="contact-icon">
                                 <i class="fab fa-linkedin"></i>
                             </div>
@@ -378,10 +378,60 @@
         setTimeout(() => {
             if (!document.querySelector('#root').hasChildNodes()) {
                 document.getElementById('static-fallback').style.display = 'block';
-                // Load the static JavaScript
-                const script = document.createElement('script');
-                script.src = './script.js';
-                document.head.appendChild(script);
+                console.log('React failed to load, showing static fallback');
+                
+                // Add static functionality
+                // Mobile menu toggle
+                const mobileToggle = document.getElementById('mobile-menu-toggle');
+                const sidebar = document.getElementById('sidebar');
+                if (mobileToggle && sidebar) {
+                    mobileToggle.addEventListener('click', () => {
+                        sidebar.classList.toggle('active');
+                    });
+                }
+                
+                // Theme toggle
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', () => {
+                        document.body.classList.toggle('dark-theme');
+                        localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+                    });
+                }
+                
+                // Load saved theme
+                if (localStorage.getItem('theme') === 'dark') {
+                    document.body.classList.add('dark-theme');
+                }
+                
+                // Smooth scrolling for navigation
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(link.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    });
+                });
+                
+                // Accordion functionality
+                document.querySelectorAll('.accordion-header').forEach(header => {
+                    header.addEventListener('click', () => {
+                        const target = document.getElementById(header.dataset.target);
+                        const isActive = header.parentElement.classList.contains('active');
+                        
+                        // Close all accordions
+                        document.querySelectorAll('.accordion-item').forEach(item => {
+                            item.classList.remove('active');
+                        });
+                        
+                        // Open clicked accordion if it wasn't active
+                        if (!isActive) {
+                            header.parentElement.classList.add('active');
+                        }
+                    });
+                });
             }
         }, 3000);
     </script>
