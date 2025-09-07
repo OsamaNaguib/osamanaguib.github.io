@@ -47,6 +47,10 @@
   --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
 }
 
+.dark .about-content {
+  background-color: var(--bg-card);
+}
+
 /* Base Styles */
 * {
   margin: 0;
@@ -104,7 +108,7 @@ p {
   position: fixed;
   top: 0;
   left: 0;
-  width: 225px;
+  width: 259px;
   height: 100vh;
   background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
   border-right: 2px solid var(--border-color);
@@ -122,8 +126,8 @@ p {
   -ms-transform: scale(1) !important;
   transform: scale(1) !important;
   transform-origin: left top;
-  min-width: 225px;
-  max-width: 225px;
+  min-width: 259px;
+  max-width: 259px;
   flex-shrink: 0;
 }
 
@@ -442,7 +446,7 @@ p {
 
 /* Main Content */
 .main-content {
-  margin-left: 245px;
+  margin-left: 279px;
   min-height: 100vh;
 }
 
@@ -478,13 +482,23 @@ p {
   max-width: none;
   margin: 0 auto 4rem auto;
   text-align: center;
-  padding-left: 6px;
-  padding-right: 6px;
+  background-color: rvar(--bg-card);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-light);
 }
 
 .about-content p {
-  padding-left: 6px;
-  padding-right: 6px;
+  text-align: left;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.about-content .lead {
+  text-align: left;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 .skills-grid {
@@ -534,7 +548,7 @@ p {
 
 /* Services Section */
 .services-accordion {
-  max-width: 900px;
+  max-width: 1350px;
   margin: 0 auto;
 }
 
@@ -702,13 +716,8 @@ p {
 }
 
 /* Power BI Section */
-.powerbi-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  padding: 0 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+:root {
+  --video-card-bg: #1f2937; /* Dark grey for video cards */
 }
 
 .powerbi-card {
@@ -720,9 +729,18 @@ p {
   transition: all 0.3s ease;
 }
 
-.powerbi-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-large);
+.powerbi-card h3 {
+  padding: 1rem;
+  margin: 0;
+  color: var(--text-primary);
+  text-align: center;
+  font-size: 1.1rem;
+}
+.powerbi-card p {
+  color: var(--text-secondary);
+  padding: 0 1rem 1rem;
+  text-align: center;
+  font-size: 1rem;
 }
 
 .video-container {
@@ -732,32 +750,73 @@ p {
   background-color: var(--bg-secondary);
 }
 
-.video-container iframe {
-  width: 100%;
-  height: 100%;
+/* Dark-mode overrides: use the dark grey card and light text */
+.dark .powerbi-card {
+  background-color: #1f2937;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.3s ease;
 }
 
-.video-placeholder {
-  height: 200px;
+.dark .powerbi-card h3 {
+  color: #f3f4f6; /* light */
+}
+.dark .powerbi-card p {
+  color: #cbd5e1; /* muted light */
+}
+
+.dark .video-container {
+  background-color: #0b1220;
+}
+
+/* Make all showcase cards equal-height and ensure Coming Soon fills the card */
+.powerbi-grid {
+  /* ensure each row cells share the same height */
+  grid-auto-rows: 1fr;
+}
+
+.powerbi-grid > .powerbi-card {
+  /* make each card fill its grid cell */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keep the video area fixed height so visual balance is preserved */
+.powerbi-card .video-container {
+  flex: 0 0 260px; /* fixed video area height (desktop) */
+}
+
+/* Ensure the textual area expands/shrinks to align cards */
+.powerbi-card h3,
+.powerbi-card p {
+  margin: 0;
+}
+
+.powerbi-card h3 { padding: 1rem 1rem 0.5rem; }
+.powerbi-card p { padding: 0 1rem 1rem; margin-top: auto; }
+
+/* Coming soon card: make its inner container fill available height */
+.powerbi-card.coming-soon > div {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-secondary);
-  color: var(--text-muted);
-}
-
-.video-placeholder i {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.powerbi-card h3 {
   padding: 1rem;
-  margin: 0;
-  color: var(--text-primary);
-  text-align: center;
-  font-size: 1.1rem;
+  box-sizing: border-box;
+}
+
+/* Responsive adjustments: reduce video area on smaller screens */
+@media (max-width: 1000px) {
+  .powerbi-card .video-container { flex: 0 0 220px; }
+}
+@media (max-width: 640px) {
+  .powerbi-card .video-container { flex: 0 0 200px; }
+  .powerbi-grid { grid-auto-rows: auto; }
+  .powerbi-grid > .powerbi-card { height: auto; }
 }
 
 /* Contact Section */

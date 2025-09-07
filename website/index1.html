@@ -6,66 +6,19 @@
     <title>Osama M. Naguib - Strategy & BI Consultant</title>
     <meta name="description" content="Strategy & Business Intelligence Consultant with 22+ years experience driving business transformation through data-driven insights">
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- Showcase sizing adjustments: larger, two-by-two layout for videos that fully fill their cards -->
-    <style>
-        /* Ensure page container uses available width and centers content */
-        .container{max-width:1400px;margin:0 auto;padding:0 18px}
-
-        /* Two columns: 2 per row and centered so the grid appears as a neat 2x2 block on desktop */
-        .powerbi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;align-items:start;max-width:1100px;margin:0 auto;padding:0 8px}
-
-        /* Card sizing & spacing - taller for better visual balance and to avoid clipping */
-        .powerbi-card{min-height:380px;padding:18px;border-radius:10px;display:flex;flex-direction:column;gap:14px;background:var(--card-bg);border:1px solid rgba(15,23,36,0.06);box-shadow:0 8px 24px rgba(2,6,23,0.06)}
-
-        /* Slightly taller video area for more presence (keeps responsive 16:9 feel while adding vertical breathing room) */
-        .video-container{position:relative;width:100%;padding-top:60%;overflow:hidden;border-radius:8px;background:#000}
-        .video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block}
-
-        /* Titles and descriptions slightly larger for better legibility */
-        .powerbi-card h3{font-size:1.12rem;margin:8px 0 6px;color:var(--text)}
-        .powerbi-card p{font-size:0.98rem;color:var(--muted);line-height:1.6;margin:0}
-
-        /* Make coming soon visually aligned and centered inside the card */
-        .powerbi-card.coming-soon > div{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
-
-        /* Medium screens: keep two columns but reduce spacing slightly */
-        @media (max-width: 1000px){
-            .powerbi-grid{grid-template-columns:repeat(2,1fr);gap:20px}
-            .powerbi-card{min-height:360px;padding:14px}
-        }
-
-        /* Single column for small screens */
-        @media (max-width: 640px){
-            .powerbi-grid{grid-template-columns:1fr;gap:16px}
-            .powerbi-card{min-height:320px;padding:12px}
-            .powerbi-card h3{font-size:1.03rem}
-            .powerbi-card p{font-size:0.95rem}
-        }
-
-        /* Sidebar: make slightly wider without changing height */
-        .sidebar{width:300px;min-width:260px}
-        /* Ensure main content shifts to accommodate wider sidebar */
-        .main-content{margin-left:300px}
-
-        /* Preserve mobile responsiveness: collapse sidebar spacing on small screens */
-        @media (max-width: 900px){
-            .sidebar{width:72px;min-width:72px}
-            .main-content{margin-left:72px}
-        }
-
-        /* Hide the small status dot overlay on the profile image */
-        .profile-image-container .profile-status{display:none!important}
-    </style>
 </head>
 <body>
+    <!-- Sidebar Navigation -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="profile-section">
@@ -95,27 +48,12 @@
                 </button>
             </div>
         </div>
-    </head>
-<body>
-
-<!-- Keep user at top on reload: prefer manual scroll restoration and force-top on load/unload -->
-<script>
-    try{
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    }catch(e){}
-    window.addEventListener('DOMContentLoaded', function(){
-        window.scrollTo(0,0);
-    });
-    window.addEventListener('beforeunload', function(){
-        window.scrollTo(0,0);
-    });
-</script>
         
         <ul class="nav-menu">
             <li><a href="#about" class="nav-link active"><i class="fas fa-user-tie"></i> About Me</a></li>
             <li><a href="#services" class="nav-link"><i class="fas fa-cogs"></i> Services</a></li>
             <li><a href="#case-studies" class="nav-link"><i class="fas fa-briefcase"></i> Case Studies</a></li>
-            <li><a href="#powerbi" class="nav-link"><i class="fas fa-chart-bar"></i> Showcase</a></li>
+            <li><a href="#powerbi" class="nav-link"><i class="fas fa-chart-bar"></i> Power BI Showcase</a></li>
             <li><a href="#contact" class="nav-link"><i class="fas fa-envelope-open-text"></i> Contact</a></li>
         </ul>
         
@@ -134,11 +72,14 @@
         </div>
     </nav>
     
+    <!-- Mobile Menu Toggle -->
     <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
         <i class="fas fa-bars"></i>
     </button>
     
+    <!-- Main Content -->
     <main class="main-content">
+        <!-- About Section -->
         <section id="about" class="section fade-in">
             <div class="container">
                 <h1 class="section-title">Driving Business Transformation Through Data-Driven Strategy</h1>
@@ -177,18 +118,11 @@
                         <h3>Commercial Growth</h3>
                         <p>Pricing strategy, sales force effectiveness, and product launches.</p>
                     </div>
-
-                    <div class="skill-card fade-in">
-                        <div class="skill-icon">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                        </div>
-                        <h3>Corporate Training</h3>
-                        <p>Custom professional development: Power BI, Excel, Python, data literacy and executive workshops tailored to your team.</p>
-                    </div>
                 </div>
             </div>
         </section>
         
+        <!-- Services Section -->
         <section id="services" class="section fade-in">
             <div class="container">
                 <h2 class="section-title">Services</h2>
@@ -244,27 +178,11 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="accordion-item fade-in">
-                        <div class="accordion-header" data-target="service-4">
-                            <h3>Corporate Training & Professional Development</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="accordion-content" id="service-4">
-                            <p>I design and deliver high-impact training programs for professionals at all levels. My approach is that of a practitioner-turned-instructor; I teach the real-world frameworks I have personally used to drive business success, ensuring every session is practical, engaging, and delivers measurable value.</p>
-                            <ul>
-                                <li>Advanced Data Analytics (Power BI, Excel, Python)</li>
-                                <li>Strategic Marketing & Go-to-Market Strategy</li>
-                                <li>Business Intelligence & Data-Driven Culture Building</li>
-                                <li>Scientific & Technical Education (Pharma, EdTech)</li>
-                                <li>Custom Curriculum Design & Development</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
         
+        <!-- Case Studies Section -->
         <section id="case-studies" class="section fade-in">
             <div class="container">
                 <h2 class="section-title">Impact Delivered: Case Studies</h2>
@@ -363,47 +281,47 @@
             </div>
         </section>
         
+        <!-- Power BI Showcase Section -->
         <section id="powerbi" class="section fade-in">
             <div class="container">
-                <h2 class="section-title">Project Showcase</h2>
+                <h2 class="section-title">Power BI Showcase</h2>
                 
                 <div class="powerbi-grid">
                     <div class="powerbi-card fade-in">
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/SynKOfvVAt0" title="Predicting Patient No-Shows with Python" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/7SiFyYXeSBc" title="Executive Sales Dashboard" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <h3>The Secret Reason Patients Skip Appointments (It's Not What You Think)</h3>
-                        <p>A complete data science case study analyzing 110,000+ patient records to uncover the key drivers of missed medical appointments. This project showcases expertise in Python, exploratory data analysis, and predictive modeling.</p>
+                        <h3>Executive Sales Dashboard</h3>
                     </div>
-
+                    
                     <div class="powerbi-card fade-in">
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/7SiFyYXeSBc" title="US Superstore Sales Analysis" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="video-placeholder">
+                            <i class="fas fa-chart-bar"></i>
+                            <p>Video Coming Soon</p>
                         </div>
-                        <h3>US Superstore Sales Analysis</h3>
-                        <p>An in-depth analysis of a superstore's sales data using a combination of Power BI for interactive dashboards and Python for advanced analytics. This project highlights skills in sales forecasting, customer segmentation, and profitability analysis.</p>
+                        <h3>Market Intelligence & Competitor Analysis</h3>
                     </div>
-
+                    
                     <div class="powerbi-card fade-in">
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/28ZYFNGh0xI" title="Executive Sales & Finance Dashboard" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="video-placeholder">
+                            <i class="fas fa-chart-line"></i>
+                            <p>Video Coming Soon</p>
                         </div>
-                        <h3>Executive Sales & Finance Dashboard</h3>
-                        <p>A dynamic and visually stunning executive dashboard built entirely in Advanced Excel. This showcase demonstrates the power of Excel for complex data modeling, interactive filtering, and creating high-impact financial and sales reports.</p>
+                        <h3>Predictive Forecasting & Inventory</h3>
                     </div>
-
-                    <!-- New 4th card: Coming Soon -->
-                    <div class="powerbi-card fade-in coming-soon">
-                        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:10px;padding:6px">
-                            <i class="fas fa-clock" style="font-size:26px;color:var(--primary)"></i>
-                            <strong>Coming Soon</strong>
-                            <p style="text-align:center;color:var(--muted);font-size:0.95rem;margin:6px 0 0;">New showcase video will appear here soon.</p>
+                    
+                    <div class="powerbi-card fade-in">
+                        <div class="video-placeholder">
+                            <i class="fas fa-users"></i>
+                            <p>Video Coming Soon</p>
                         </div>
+                        <h3>Sales Force Effectiveness (SFE) Tracker</h3>
                     </div>
                 </div>
             </div>
         </section>
         
+        <!-- Contact Section -->
         <section id="contact" class="section fade-in">
             <div class="container">
                 <h2 class="section-title">Let's Connect</h2>
@@ -437,6 +355,7 @@
         </section>
     </main>
     
+    <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
