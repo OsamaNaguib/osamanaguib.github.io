@@ -190,10 +190,17 @@
 
         <body>
 
-            <!-- Scroll restoration: allow the browser to preserve scroll position on navigation/refresh -->
+            <!-- Keep user at top on reload: prefer manual scroll restoration and force-top on load/unload -->
             <script>
-                // Prefer browser default scroll restoration so refresh preserves user position.
-                try { if ('scrollRestoration' in history) history.scrollRestoration = 'auto'; } catch (e) { }
+                try {
+                    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+                } catch (e) { }
+                window.addEventListener('DOMContentLoaded', function () {
+                    window.scrollTo(0, 0);
+                });
+                window.addEventListener('beforeunload', function () {
+                    window.scrollTo(0, 0);
+                });
             </script>
 
             <ul class="nav-menu">
@@ -227,10 +234,9 @@
 
     <main class="main-content">
         <section id="about" class="section fade-in">
-            <div class="container">
-                <h1 class="section-title" style="margin-bottom:1.5rem;">Driving Business Transformation Through Data-Driven Strategy</h1>
-                <div class="about-flex">
+            <div class="container about-flex">
                 <div class="about-left">
+                    <h1 class="section-title" style="margin-bottom:1.5rem;">Driving Business Transformation Through Data-Driven Strategy</h1>
                     <div class="about-content">
                         <p class="lead">With over 2 decades of cross-sector leadership experience, I specialize in architecting and implementing vision-led strategies that deliver tangible, quantifiable results. My expertise lies at the intersection of strategic marketing, business intelligence, and commercial growth, enabling organizations to navigate complex market dynamics and achieve sustainable success.</p>
                         <p>My career journey spans pharmaceuticals, publishing, education, and retail, providing me with a unique perspective on diverse business challenges. Backed by an international MBA and multiple Data Science Nanodegrees, I bring a rigorous, analytical approach to every project.</p>
@@ -239,55 +245,48 @@
                     </div>
                 </div>
                 <div class="about-right">
-                    <div class="video-showcase">
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/DIcW9yE1ThA?si=i6aToQ3Yq4jb9LSh"
-                                title="YouTube video player"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
+                    <div class="about-video-container" style="height:100%;display:flex;align-items:center;justify-content:center;">
+                        <iframe width="100%" height="100%" style="min-height:350px;max-height:500px;border-radius:12px;" src="https://www.youtube.com/embed/DIcW9yE1ThA?si=i6aToQ3Yq4jb9LSh"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen class="intro-video"></iframe>
                     </div>
-                    <div class="spacer-16"></div>
-                    <a href="#contact" class="btn-connect">Let's Connect</a>
-                </div>
                 </div>
             </div>
             <div class="container">
                 <div class="skills-grid">
-                    <a href="#service-1" class="skill-card fade-in">
+                    <div class="skill-card fade-in">
                         <div class="skill-icon">
                             <i class="fas fa-chess-king"></i>
                         </div>
                         <h3>Strategic Planning</h3>
                         <p>Market expansion, GTM strategy, and feasibility analysis.</p>
-                    </a>
+                    </div>
 
-                    <a href="#service-2" class="skill-card fade-in">
+                    <div class="skill-card fade-in">
                         <div class="skill-icon">
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <h3>Business Intelligence</h3>
                         <p>Building BI functions, predictive modeling, and data visualization.</p>
-                    </a>
+                    </div>
 
-                    <a href="#service-3" class="skill-card fade-in">
+                    <div class="skill-card fade-in">
                         <div class="skill-icon">
                             <i class="fas fa-rocket"></i>
                         </div>
                         <h3>Commercial Growth</h3>
                         <p>Pricing strategy, sales force effectiveness, and product launches.</p>
-                    </a>
+                    </div>
 
-                    <a href="#service-4" class="skill-card fade-in">
+                    <div class="skill-card fade-in">
                         <div class="skill-icon">
                             <i class="fas fa-chalkboard-teacher"></i>
                         </div>
                         <h3>Corporate Training</h3>
                         <p>Custom professional development: Power BI, Excel, Python, data literacy and executive
                             workshops tailored to your team.</p>
-                    </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -303,25 +302,16 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content" id="service-1">
-                            <div class="service-content">
-                                <div class="service-image">
-                                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" 
-                                        alt="Strategic Planning and Business Transformation" 
-                                        loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/800x600?text=Strategy';">
-                                </div>
-                                <div class="service-text">
-                                    <p>I partner with leadership teams to architect and implement vision-led strategies that
-                                        result in tangible business transformation. From market entry analysis to full-scale
-                                        operational turnarounds, my focus is on creating sustainable value.</p>
-                                    <ul>
-                                        <li>GTM Strategy & Execution</li>
-                                        <li>Market Expansion & Feasibility Studies (30+ conducted)</li>
-                                        <li>Corporate & Business Unit Strategy Development</li>
-                                        <li>Digital Transformation Roadmaps</li>
-                                        <li>Change Management & Strategic Alliance Negotiation</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <p>I partner with leadership teams to architect and implement vision-led strategies that
+                                result in tangible business transformation. From market entry analysis to full-scale
+                                operational turnarounds, my focus is on creating sustainable value.</p>
+                            <ul>
+                                <li>GTM Strategy & Execution</li>
+                                <li>Market Expansion & Feasibility Studies (30+ conducted)</li>
+                                <li>Corporate & Business Unit Strategy Development</li>
+                                <li>Digital Transformation Roadmaps</li>
+                                <li>Change Management & Strategic Alliance Negotiation</li>
+                            </ul>
                         </div>
                     </div>
 
@@ -331,25 +321,16 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content" id="service-2">
-                            <div class="service-content">
-                                <div class="service-image">
-                                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" 
-                                        alt="Business Intelligence and Analytics Dashboard" 
-                                        loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/800x600?text=BI';">
-                                </div>
-                                <div class="service-text">
-                                    <p>I help organizations become data-driven by establishing and leading Business Intelligence
-                                        functions from the ground up. My approach translates complex data into clear, actionable
-                                        insights that empower decision-making at every level.</p>
-                                    <ul>
-                                        <li>BI Department Setup & Team Leadership</li>
-                                        <li>Predictive Forecasting Models (improved accuracy by 15%)</li>
-                                        <li>Executive KPI Dashboards (Power BI, Tableau)</li>
-                                        <li>Large-Scale Data Acquisition & Market Intelligence Projects</li>
-                                        <li>Data Culture & Literacy Training</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <p>I help organizations become data-driven by establishing and leading Business Intelligence
+                                functions from the ground up. My approach translates complex data into clear, actionable
+                                insights that empower decision-making at every level.</p>
+                            <ul>
+                                <li>BI Department Setup & Team Leadership</li>
+                                <li>Predictive Forecasting Models (improved accuracy by 15%)</li>
+                                <li>Executive KPI Dashboards (Power BI, Tableau)</li>
+                                <li>Large-Scale Data Acquisition & Market Intelligence Projects</li>
+                                <li>Data Culture & Literacy Training</li>
+                            </ul>
                         </div>
                     </div>
 
@@ -359,25 +340,16 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content" id="service-3">
-                            <div class="service-content">
-                                <div class="service-image">
-                                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f" 
-                                        alt="Commercial Growth and Business Optimization" 
-                                        loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/800x600?text=Growth';">
-                                </div>
-                                <div class="service-text">
-                                    <p>My focus is on delivering consistent, data-driven commercial growth. I design and
-                                        implement frameworks that enhance profitability, market share, and operational
-                                        efficiency.</p>
-                                    <ul>
-                                        <li>Scientific Pricing Strategy & Implementation</li>
-                                        <li>Salesforce Effectiveness (SFE) Frameworks (14% op cost reduction)</li>
-                                        <li>Product Launch Strategy (20+ successful launches)</li>
-                                        <li>Customer Segmentation & Value Proposition Design</li>
-                                        <li>EdTech & Digital Product Commercialization</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <p>My focus is on delivering consistent, data-driven commercial growth. I design and
+                                implement frameworks that enhance profitability, market share, and operational
+                                efficiency.</p>
+                            <ul>
+                                <li>Scientific Pricing Strategy & Implementation</li>
+                                <li>Salesforce Effectiveness (SFE) Frameworks (14% op cost reduction)</li>
+                                <li>Product Launch Strategy (20+ successful launches)</li>
+                                <li>Customer Segmentation & Value Proposition Design</li>
+                                <li>EdTech & Digital Product Commercialization</li>
+                            </ul>
                         </div>
                     </div>
 
@@ -387,25 +359,17 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="accordion-content" id="service-4">
-                            <div class="service-content">
-                                <div class="service-image">
-                                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0" alt="Corporate Training and Professional Development" 
-                                        loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x400?text=Training';">
-                                </div>
-                                <div class="service-text">
-                                    <p>I design and deliver high-impact training programs for professionals at all levels. My
-                                        approach is that of a practitioner-turned-instructor; I teach the real-world frameworks
-                                        I have personally used to drive business success, ensuring every session is practical,
-                                        engaging, and delivers measurable value.</p>
-                                    <ul>
-                                        <li>Advanced Data Analytics (Power BI, Excel, Python)</li>
-                                        <li>Strategic Marketing & Go-to-Market Strategy</li>
-                                        <li>Business Intelligence & Data-Driven Culture Building</li>
-                                        <li>Scientific & Technical Education (Pharma, EdTech)</li>
-                                        <li>Custom Curriculum Design & Development</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <p>I design and deliver high-impact training programs for professionals at all levels. My
+                                approach is that of a practitioner-turned-instructor; I teach the real-world frameworks
+                                I have personally used to drive business success, ensuring every session is practical,
+                                engaging, and delivers measurable value.</p>
+                            <ul>
+                                <li>Advanced Data Analytics (Power BI, Excel, Python)</li>
+                                <li>Strategic Marketing & Go-to-Market Strategy</li>
+                                <li>Business Intelligence & Data-Driven Culture Building</li>
+                                <li>Scientific & Technical Education (Pharma, EdTech)</li>
+                                <li>Custom Curriculum Design & Development</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

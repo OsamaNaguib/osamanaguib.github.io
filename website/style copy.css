@@ -1,8 +1,5 @@
 /* CSS Variables for Theme Management */
 :root {
-  /* Base sizing */
-  font-size: 14px; /* Reduced from default 16px for 80% scale */
-  
   /* Light Mode Colors */
   --primary-color: #0284c7;
   --primary-hover: #0369a1;
@@ -102,38 +99,29 @@ p {
 
 /* Container */
 .container {
-  max-width: 960px; /* Reduced from 1080px */
+  max-width: calc(1080px * 1.25); /* Scaled up by 1.25 to match new root font size */
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2.7rem;
 }
 
-/* Sidebar Navigation (restored from style_8.9.2025.css) */
+/* Sidebar Navigation */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 259px;
+  width: clamp(250px, 20vw, 300px);
   height: 100vh;
-  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
-  border-right: 2px solid var(--border-color);
-  padding: 1rem 0;
+  background-color: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  z-index: 100;
-  transform: none !important;
-  box-shadow: var(--shadow-large);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  zoom: 1 !important;
-  -webkit-transform: scale(1) !important;
-  -moz-transform: scale(1) !important;
-  -ms-transform: scale(1) !important;
-  transform: scale(1) !important;
-  transform-origin: left top;
-  min-width: 259px;
-  max-width: 259px;
-  flex-shrink: 0;
+  align-items: stretch;
+  z-index: 40;
+  transition: transform 0.3s ease-in-out;
+  overflow-y: auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .sidebar-header {
@@ -158,21 +146,21 @@ p {
 
 .profile-section {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .profile-image-container {
   position: relative;
   display: inline-block;
-  margin-bottom: 2rem; /* increased ~20% */
+  margin-bottom: 1.5rem;
 }
 
 .profile-image {
-  width: 100px; /* 70px * 1.2 */
-  height: 100px;
+  width: 81px;
+  height: 81px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--primary-color);
+  border: 3px solid var(--primary-color);
   transition: all 0.3s ease;
   box-shadow: var(--shadow-medium);
 }
@@ -207,9 +195,9 @@ p {
 }
 
 .profile-name {
-  font-size: 1.5rem; /* increased ~20% */
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 0.81rem;
+  margin-bottom: 0.675rem;
   color: var(--text-primary);
   letter-spacing: -0.025em;
   white-space: nowrap;
@@ -231,34 +219,28 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem; /* 0.75 * 1.2 */
-  padding: 1rem; /* scaled ~20% */
+  gap: 1rem;
+  padding: 1rem;
   background-color: var(--bg-secondary);
   border-radius: 12px;
   border: 1px solid var(--border-color);
   margin-top: 1rem;
-  max-width: 2000px; /* keep width to avoid layout shift */
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .stat-item {
   text-align: center;
 }
 
-.stat-item span { display: block; }
-.stat-number { margin-bottom: 2px; }
-
 .stat-number {
   display: block;
-  font-size: 1.25rem; /* 0.95 * 1.2 */
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--primary-color);
   line-height: 1;
 }
 
 .stat-label {
-  font-size: 0.75rem; /* 0.6 * 1.2 */
+  font-size: 0.75rem;
   color: var(--text-muted);
   font-weight: 500;
   text-transform: uppercase;
@@ -274,7 +256,7 @@ p {
 .theme-toggle {
   display: flex;
   justify-content: center;
-  margin-top: 0.6rem;
+  margin-top: 0.5rem;
 }
 
 #theme-toggle {
@@ -282,17 +264,17 @@ p {
   border: 2px solid var(--primary-color);
   border-radius: 25px;
   width: auto;
-  height: 60px; /* scaled */
-  padding: 0 1.8rem;
+  height: 50px;
+  padding: 0 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
   color: var(--text-secondary);
   font-weight: 500;
-  font-size: 1.08rem; /* scaled */
+  font-size: 0.9rem;
 }
 
 #theme-toggle:hover {
@@ -305,7 +287,7 @@ p {
 }
 
 .toggle-text {
-  font-size: 1.05rem; /* ~20% larger */
+  font-size: 0.875rem;
   font-weight: 500;
 }
 
@@ -323,14 +305,14 @@ p {
 .nav-link {
   display: flex;
   align-items: center;
-  padding: 0.54rem 1.08rem; /* scaled */
+  padding: 0.54rem 1.35rem;
   text-decoration: none;
   color: var(--text-secondary);
   transition: all 0.3s ease;
   border-left: 4px solid transparent;
   position: relative;
   font-weight: 500;
-  font-size: 1.10rem; /* scaled */
+  font-size: 0.95rem;
 }
 
 .nav-link::before {
@@ -360,9 +342,9 @@ p {
 
 .nav-link i {
   margin-right: 1rem;
-  width: 26px; /* 22px * 1.2 */
+  width: 22px;
   text-align: center;
-  font-size: 1.32rem; /* 1.1rem * 1.2 */
+  font-size: 1.1rem;
 }
 
 /* Sidebar Footer */
@@ -395,15 +377,15 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 52px; /* 44px * 1.2 */
-  height: 52px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--bg-secondary), var(--bg-card));
   color: var(--text-secondary);
   text-decoration: none;
   transition: all 0.3s ease;
   border: 2px solid var(--border-color);
-  font-size: 1.44rem; /* 1.2rem * 1.2 */
+  font-size: 1.2rem;
   position: relative;
   overflow: hidden;
 }
@@ -457,7 +439,7 @@ p {
 
 /* Main Content */
 .main-content {
-  margin-left: 279px; /* matches older snapshot layout */
+  margin-left: 279px;
   min-height: 100vh;
 }
 
@@ -465,18 +447,6 @@ p {
   padding: 2rem 0;
   min-height: 100vh;
   display: flex;
-  align-items: flex-start;
-}
-
-/* About section should stack its internal containers vertically within the .section
-   but the inner .about-flex handles the two-column layout (text left, video right) */
-.section#about {
-  display: block;
-}
-
-.about-flex {
-  display: flex;
-  gap: 2rem;
   align-items: flex-start;
 }
 
@@ -526,22 +496,9 @@ p {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-top: 2rem;
-  max-width: 100%;
-}
-
-/* Ensure skills grid clears the about section and sits below on all viewports */
-.about-flex + .container .skills-grid,
-.container > .skills-grid {
-  clear: both;
-  margin-top: 2rem;
-}
-
-/* Restrict skill-card maximum width so cards wrap nicely on narrower viewports */
-.skill-card {
-  max-width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
 }
 
 .skill-card {
@@ -588,36 +545,24 @@ p {
 
 /* About Section */
 .about-right {
-  flex: 0 0 40%;
-  min-width: 300px;
-  max-width: 640px;
-  margin-bottom: 2rem;
+  flex: 1;
+  min-width: 340px;
+  display: flex;
+  flex-direction: column;
 }
 
-.about-left {
-  flex: 1 1 60%;
-}
-
-/* Ensure left text appears before right video (useful when flex-direction changes) */
-.about-left { order: 1; }
-.about-right { order: 2; }
-
-.video-showcase {
-  background: var(--bg-card);
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: var(--shadow-medium);
+.about-video-container {
+  height: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: 0.75rem;
-  min-height: 260px;
+  justify-content: center;
 }
 
 .video-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 250px;
+  height: 100%;
+  min-height: 400px;
   background: var(--bg-card);
   border-radius: 8px;
   overflow: hidden;
@@ -628,7 +573,7 @@ p {
   top: 0;
   left: 0;
   width: 100%;
-  height: 250px;
+  height: 100%;
   border: 0;
 }
 
@@ -690,64 +635,6 @@ p {
 
 .accordion-content > div {
   padding: 0 2rem 2rem 2rem;
-}
-
-.service-content {
-  display: flex;
-  gap: 2rem;
-  align-items: stretch;
-  padding: 1rem 0 0 0;
-}
-
-.service-text {
-  flex: 1 1 60%;
-}
-
-.service-image {
-  flex: 0 0 38%;
-  min-width: 240px;
-  height: auto;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: var(--shadow-medium);
-  background: var(--bg-card);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* leave a narrow margin above each service image */
-.service-image { margin-top: 8px; }
-
-/* helper spacer if inline spacer was used */
-.spacer-16 { height: 16px; display:block; }
-
-/* Connect button below the video; align to end of about-content by stretching the right column */
-.about-right { display:flex; flex-direction:column; justify-content:flex-start; }
-.btn-connect {
-  display: inline-block;
-  margin-top: auto;
-  padding: 12px 22px;
-  background: linear-gradient(90deg,var(--primary-color),var(--primary-hover));
-  color: white;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: var(--shadow-medium);
-  align-self: center;
-}
-.btn-connect:hover { transform: translateY(-3px); box-shadow: var(--shadow-large); }
-
-.service-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-  display: block;
-}
-
-.accordion-content.active .service-image img {
-  transform: scale(1.02);
 }
 
 .accordion-content p {
@@ -878,19 +765,19 @@ p {
   margin: 0;
   color: var(--text-primary);
   text-align: center;
-  font-size: 1.12rem; /* match older snapshot */
+  font-size: 1.1rem;
 }
 .powerbi-card p {
   color: var(--text-secondary);
   padding: 0 1rem 1rem;
   text-align: center;
-  font-size: 0.98rem; /* slightly smaller to match older snapshot */
+  font-size: 1rem;
 }
 
 .video-container {
   position: relative;
   width: 100%;
-  height: 5px;
+  height: 250px;
   background-color: var(--bg-secondary);
 }
 
@@ -917,34 +804,20 @@ p {
 
 /* Make all showcase cards equal-height and ensure Coming Soon fills the card */
 .powerbi-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
-  align-items: start;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 8px;
+  /* ensure each row cells share the same height */
   grid-auto-rows: 1fr;
 }
+
 .powerbi-grid > .powerbi-card {
+  /* make each card fill its grid cell */
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding: 18px;
-  border-radius: 10px;
-  gap: 14px;
-  background: var(--card-bg, var(--bg-card));
-  border: 1px solid rgba(15, 23, 36, 0.06);
-  box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
 }
 
-.powerbi-grid > .powerbi-card .video-container {
-  position: relative;
-  width: 100%;
-  padding-top: 6%; /* slightly taller video area */
-  overflow: hidden;
-  border-radius: 8px;
-  background: #000;
+/* Keep the video area fixed height so visual balance is preserved */
+.powerbi-card .video-container {
+  flex: 0 0 260px; /* fixed video area height (desktop) */
 }
 
 /* Ensure the textual area expands/shrinks to align cards */
@@ -1099,28 +972,14 @@ p {
   }
 }
 
-/* Collapse sidebar and main content margin on narrow viewports similar to earlier design */
-@media (max-width: 900px) {
-  .sidebar { width: 72px; min-width: 72px; }
-  .main-content { margin-left: 72px; }
-}
-
 @media (max-width: 768px) {
   .sidebar {
-    width: 200px;
+    width: 280px;
   }
   
   .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-  
-  .about-flex {
-    flex-direction: column;
-  }
-  
-  .about-right {
-    max-width: 100%;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   
   .case-studies-grid {
@@ -1145,7 +1004,7 @@ p {
   h3 { font-size: 1.25rem; }
   
   .section {
-    min-height: 0;
+    min-height: auto;
     padding: 2rem 0;
   }
   
@@ -1191,7 +1050,7 @@ p {
     width: 100%;
     height: 100%;
     padding: 1rem;
-    background: var(--bg-card);
+    background: var(--bg-secondary);
     border-radius: 16px;
     box-shadow: var(--shadow-medium);
 }

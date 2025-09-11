@@ -59,51 +59,6 @@ class NavigationManager {
             }
         });
 
-        // Skill card clicks for service navigation — scroll first, then expand only the target accordion and close others
-        document.querySelectorAll('.skill-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                e.preventDefault();
-                const serviceId = card.getAttribute('href');
-                const serviceSection = document.querySelector('#services');
-                const targetAccordionContent = document.querySelector(serviceId);
-
-                if (!serviceSection || !targetAccordionContent) return;
-
-                // Scroll to services section first
-                serviceSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-                // After scroll completes (approx), close others and open only the target
-                setTimeout(() => {
-                    // Close all accordion contents
-                    document.querySelectorAll('.accordion-content').forEach(content => {
-                        content.style.maxHeight = null;
-                        content.classList.remove('active');
-                        const parent = content.parentElement;
-                        const h = parent ? parent.querySelector('.accordion-header') : null;
-                        if (h) {
-                            h.classList.remove('active');
-                            const icon = h.querySelector('i');
-                            if (icon) icon.classList.remove('rotated');
-                        }
-                    });
-
-                    // Open the target content
-                    const header = document.querySelector(`.accordion-header[data-target="${targetAccordionContent.id}"]`);
-                    if (header) header.classList.add('active');
-                    targetAccordionContent.classList.add('active');
-                    // set maxHeight to enable transition
-                    targetAccordionContent.style.maxHeight = targetAccordionContent.scrollHeight + 'px';
-                    if (header) {
-                        const icon = header.querySelector('i');
-                        if (icon) icon.classList.add('rotated');
-                    }
-
-                    // Mark Services nav as active
-                    navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#services'));
-                }, 350);
-            });
-        });
-
         // Navigation link clicks
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
@@ -189,7 +144,6 @@ class AccordionManager {
             const c = document.getElementById(h.dataset.target);
             if (c) {
                 c.classList.remove('active');
-                c.style.maxHeight = null;
             }
         });
 
@@ -198,8 +152,6 @@ class AccordionManager {
             header.classList.add('active');
             if (content) {
                 content.classList.add('active');
-                // set maxHeight for CSS transition
-                content.style.maxHeight = content.scrollHeight + 'px';
             }
         }
     }
